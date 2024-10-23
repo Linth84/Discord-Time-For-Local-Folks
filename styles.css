@@ -1,68 +1,136 @@
+/* Estilos generales */
 body {
     font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #2c2f33;
-    color: #fff;
+    background-color: #2c2f33; /* Fondo oscuro */
+    color: #ffffff; /* Texto blanco */
     margin: 0;
-    flex-direction: column;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Coloca el contenido y el pie en una columna */
+    min-height: 100vh; /* Asegura que el contenido cubra toda la pantalla */
 }
 
 .container {
-    text-align: center;
-    background-color: #23272a;
+    flex: 1; /* Permite que el contenedor ocupe el espacio disponible */
+    max-width: 400px;
+    margin: auto;
     padding: 20px;
-    border-radius: 8px;
-    width: 300px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    background-color: #23272a; /* Fondo ligeramente más claro */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    color: #7289da; /* Azul típico de Discord */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    display: block;
 }
 
 input, select, button {
-    margin-top: 10px;
-    padding: 8px;
-    width: 100%;
+    width: 100%; /* Asegura que todos los elementos de entrada ocupen el 100% del ancho */
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 1rem;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
+}
+
+input[type="datetime-local"] {
+    /* Ajuste específico para el campo de fecha y hora */
+    padding: 10px;
+}
+
+input, select {
+    background-color: #99aab5; /* Fondo gris claro para inputs */
+    color: #23272a; /* Texto oscuro en los inputs */
 }
 
 button {
-    background-color: #7289da;
-    color: white;
+    background-color: #7289da; /* Botones en azul */
+    color: #ffffff;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #5a6ca9;
+    background-color: #677bc4; /* Azul más oscuro al pasar el ratón */
 }
 
-#result {
-    margin-top: 20px;
-    font-size: 16px;
+#copy-button {
+    display: none;
 }
 
 .lang-button {
-    margin: 5px;
+    display: inline-block;
     background-color: #99aab5;
-    border: none;
-    padding: 8px;
+    color: #23272a;
+    padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
+    margin-right: 10px;
+    font-size: 1rem;
+    border: none;
 }
 
 .lang-button:hover {
-    background-color: #838d98;
+    background-color: #7289da;
+    color: #ffffff;
 }
 
-#language-switch {
-    margin-top: 20px;
-}
-
+/* Footer */
 footer {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #99aab5;
     text-align: center;
-    position: fixed;
-    bottom: 10px;
+    padding: 10px;
+    background-color: #2c2f33; /* Color de fondo oscuro */
+    color: #99aab5; /* Texto en gris claro */
+    font-size: 0.9rem;
+    position: relative;
+    bottom: 0;
+    width: 100%; /* Asegura que cubra todo el ancho */
+    margin-top: auto; /* Mueve el footer hacia el fondo si hay espacio */
 }
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .container {
+        width: 90%; /* Ajuste para pantallas más pequeñas */
+    }
+
+    input, select, button {
+        font-size: 0.9rem;
+    }
+
+    #copy-button {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 100%; /* Aprovechar el espacio de la pantalla móvil */
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    input, select, button {
+        font-size: 0.8rem;
+    }
+
+    #copy-button {
+        font-size: 0.8rem;
+    }
+
+    footer {
+        font-size: 0.8rem;
+    }
+}
+
