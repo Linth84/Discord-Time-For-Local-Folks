@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Times for Local Folks</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 id="title">Tiempos de Discord para locales</h1>
+        
+        <label for="date-input" id="date-label">Introduce la fecha y hora local:</label>
+        <input type="datetime-local" id="date-input">
+        
+        <label for="format" id="format-label">Elige el formato de Discord:</label>
+        <select id="format">
+            <option value="f">Fecha completa (ej. 24 de diciembre de 2024 18:30)</option>
+            <option value="F">Fecha larga (ej. Martes, 24 de diciembre de 2024 18:30)</option>
+            <option value="t">Hora corta (ej. 18:30)</option>
+            <option value="T">Hora larga (ej. 18:30:45)</option>
+            <option value="d">Solo fecha (ej. 24/12/2024)</option>
+        </select>
+        
+        <button id="generate-button">Generar timestamp</button>
+        
+        <p id="result"></p>
+
+        <div id="language-switch">
+            <button id="es" class="lang-button">ES</button>
+            <button id="en" class="lang-button">EN</button>
+        </div>
+    </div>
+
+    <footer id="footer">
+        Desarrollado por Edgardo Villalba
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

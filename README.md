@@ -1,0 +1,2 @@
+Show on discord your time and your friends will the their local time. Get your parties well schedule.
+Muestra en discord tu hora y tus amigos veran su hora en hora local. Ten tus parties bien organizadas
