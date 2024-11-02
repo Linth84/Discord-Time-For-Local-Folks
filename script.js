@@ -104,4 +104,3 @@ langButtons.forEach(button => {
         updateFormatOptions();
     });
 });
-
