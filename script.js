@@ -3,11 +3,7 @@ const formatSelect = document.getElementById('format');
 const generateButton = document.getElementById('generate-button');
 const resultParagraph = document.getElementById('result');
 const copyButton = document.getElementById('copy-button');
-const title = document.getElementById('title');
-const dateLabel = document.getElementById('date-label');
-const formatLabel = document.getElementById('format-label');
 const langButtons = document.querySelectorAll('.lang-button');
-const footer = document.getElementById('footer');
 
 let language = 'es'; // Idioma predeterminado
 
@@ -28,11 +24,40 @@ const formatOptions = {
     ]
 };
 
-// Función para generar el timestamp de Discord
-generateButton.addEventListener('click', () => {
-    const dateValue = new Date(dateInput.value || Date.now()); // Usa la fecha actual si no hay valor
+// Función para actualizar las opciones del selector de formato según el idioma
+function updateFormatOptions() {
+    formatSelect.innerHTML = ''; // Limpiar el selector de formato
+    const options = formatOptions[language];
 
-    // Obtener timestamp Unix en segundos
+    options.forEach(option => {
+        const newOption = document.createElement('option');
+        newOption.value = option.value;
+        newOption.textContent = option.text;
+        formatSelect.appendChild(newOption);
+    });
+}
+
+// Llamar a la función para cargar las opciones de formato al inicio
+updateFormatOptions();
+
+// Configurar la fecha actual como valor predeterminado en el campo de entrada de fecha
+const now = new Date();
+const formattedDate = now.toISOString().slice(0, 16); // Formato "YYYY-MM-DDTHH:MM" para inputs de tipo datetime-local
+dateInput.value = formattedDate;
+
+generateButton.addEventListener('click', () => {
+    let dateValue = new Date(formattedDate); // Establecer la fecha actual por defecto
+    const userDate = dateInput.value;
+
+    // Comprobar si el usuario ha ingresado una fecha y hora válidas
+    if (userDate) {
+        const userTime = userDate.slice(11); // Obtener solo la hora ingresada por el usuario
+        const [hours, minutes] = userTime.split(':'); // Separar horas y minutos
+        dateValue.setHours(hours);
+        dateValue.setMinutes(minutes);
+    }
+
+    // Obtener el timestamp Unix en segundos
     const timestamp = Math.floor(dateValue.getTime() / 1000);
     const format = formatSelect.value;
 
@@ -60,44 +85,10 @@ generateButton.addEventListener('click', () => {
     };
 });
 
-// Función para actualizar las opciones del selector de formato según el idioma
-function updateFormatOptions() {
-    formatSelect.innerHTML = ''; // Vaciar el selector
-
-    const options = formatOptions[language]; // Obtener las opciones según el idioma
-
-    options.forEach(option => {
-        const newOption = document.createElement('option');
-        newOption.value = option.value;
-        newOption.textContent = option.text;
-        formatSelect.appendChild(newOption);
-    });
-}
-
-// Función para cambiar el idioma
+// Cambiar el idioma y actualizar las opciones de formato al hacer clic en los botones de idioma
 langButtons.forEach(button => {
     button.addEventListener('click', (e) => {
         language = e.target.id;
-
-        if (language === 'es') {
-            title.textContent = 'Tiempos de Discord para locales';
-            dateLabel.textContent = 'Introduce la fecha y hora local (opcional):';
-            formatLabel.textContent = 'Elige el formato de Discord:';
-            generateButton.textContent = 'Generar timestamp';
-            footer.textContent = 'Desarrollado por Edgardo Villalba';
-            copyButton.textContent = 'Copiar al Portapapeles';
-        } else if (language === 'en') {
-            title.textContent = 'Discord Times for Local Folks';
-            dateLabel.textContent = 'Enter your local date and time (optional):';
-            formatLabel.textContent = 'Choose Discord format:';
-            generateButton.textContent = 'Generate timestamp';
-            footer.textContent = 'Developed by Edgardo Villalba';
-            copyButton.textContent = 'Copy to Clipboard';
-        }
-
-        updateFormatOptions(); // Actualizar las opciones del selector de formato
+        updateFormatOptions(); // Actualizar las opciones de formato en el idioma seleccionado
     });
 });
-
-// Inicializar las opciones de formato
-updateFormatOptions();
