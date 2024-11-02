@@ -3,6 +3,9 @@ const formatSelect = document.getElementById('format');
 const generateButton = document.getElementById('generate-button');
 const resultParagraph = document.getElementById('result');
 const copyButton = document.getElementById('copy-button');
+const title = document.getElementById('title');
+const dateLabel = document.getElementById('date-label');
+const formatLabel = document.getElementById('format-label');
 const langButtons = document.querySelectorAll('.lang-button');
 
 let language = 'es'; // Idioma predeterminado
@@ -26,7 +29,7 @@ const formatOptions = {
 
 // Función para actualizar las opciones del selector de formato según el idioma
 function updateFormatOptions() {
-    formatSelect.innerHTML = ''; // Limpiar el selector de formato
+    formatSelect.innerHTML = '';
     const options = formatOptions[language];
 
     options.forEach(option => {
@@ -77,10 +80,28 @@ generateButton.addEventListener('click', () => {
     };
 });
 
-// Cambiar el idioma y actualizar las opciones de formato al hacer clic en los botones de idioma
+// Cambiar el idioma y actualizar los textos y las opciones de formato al hacer clic en los botones de idioma
 langButtons.forEach(button => {
     button.addEventListener('click', (e) => {
         language = e.target.id;
-        updateFormatOptions(); // Actualizar las opciones de formato en el idioma seleccionado
+
+        if (language === 'es') {
+            title.textContent = 'Tiempos de Discord para locales';
+            dateLabel.textContent = 'Introduce la fecha y hora que quieras:';
+            formatLabel.textContent = 'Elige el formato de Discord:';
+            generateButton.textContent = 'Generar timestamp';
+            footer.textContent = 'Desarrollado por Edgardo Villalba';
+            copyButton.textContent = 'Copiar al Portapapeles';
+        } else if (language === 'en') {
+            title.textContent = 'Discord Times for Local Folks';
+            dateLabel.textContent = 'Enter the date and time you want:';
+            formatLabel.textContent = 'Choose Discord format:';
+            generateButton.textContent = 'Generate timestamp';
+            footer.textContent = 'Developed by Edgardo Villalba';
+            copyButton.textContent = 'Copy to Clipboard';
+        }
+
+        updateFormatOptions();
     });
 });
+
