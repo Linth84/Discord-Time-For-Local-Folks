@@ -40,22 +40,14 @@ function updateFormatOptions() {
 // Llamar a la función para cargar las opciones de formato al inicio
 updateFormatOptions();
 
-// Configurar la fecha actual como valor predeterminado en el campo de entrada de fecha
-const now = new Date();
+// Configurar la fecha y hora local de Buenos Aires (GMT-3) como valor predeterminado en el campo de entrada de fecha
+const buenosAiresOffset = -3 * 60; // GMT-3 en minutos
+const now = new Date(new Date().getTime() + buenosAiresOffset * 60 * 1000);
 const formattedDate = now.toISOString().slice(0, 16); // Formato "YYYY-MM-DDTHH:MM" para inputs de tipo datetime-local
 dateInput.value = formattedDate;
 
 generateButton.addEventListener('click', () => {
-    let dateValue = new Date(formattedDate); // Establecer la fecha actual por defecto
-    const userDate = dateInput.value;
-
-    // Comprobar si el usuario ha ingresado una fecha y hora válidas
-    if (userDate) {
-        const userTime = userDate.slice(11); // Obtener solo la hora ingresada por el usuario
-        const [hours, minutes] = userTime.split(':'); // Separar horas y minutos
-        dateValue.setHours(hours);
-        dateValue.setMinutes(minutes);
-    }
+    let dateValue = new Date(dateInput.value);
 
     // Obtener el timestamp Unix en segundos
     const timestamp = Math.floor(dateValue.getTime() / 1000);
